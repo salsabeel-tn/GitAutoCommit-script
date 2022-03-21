@@ -3,6 +3,7 @@ import sys
 commitName = "autocommit"
 currentFolder = __file__[:-7]
 os.chdir(currentFolder)
+anyChange = False
 
 def updateDates():
     f = open(currentFolder + "fileDates.txt", "w")
@@ -27,7 +28,10 @@ while True:
     for file in os.listdir(currentFolder):
         if not file in ["main.py", ".git", "fileDates.txt", "tempCodeRunnerFile.py"]:
             if (float(getcurrentMDate(file)) > float(getsavedMDate(file))):
+                anyChange = True
                 os.system("git add --all")
                 updateDates()
-    os.system("git commit -m " + commitName)
-    os.system("git push origin master")
+    if (anyChange):
+        anyChange = False
+        os.system("git commit -m " + commitName)
+        os.system("git push origin master")
