@@ -17,6 +17,7 @@ def getsavedMDate(fileName):
     for line in f:
         if (len(line) > 0 and line.split("=")[0] == fileName):
             return line.split("=")[1]
+    return 0
 
 def getcurrentMDate(fileName):
     for file in os.listdir(currentFolder):
